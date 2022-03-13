@@ -18,7 +18,7 @@ In the sample app you will be able to:
 
 ## Pendo SDK integration 
 
-In this section you will be presented with the actual steps taken to integrate the Pendo SDK into the example To-Do app as well as the install instructions themselfs.
+In this section you will be presented with the actual steps taken to integrate the Pendo SDK into the example To-Do app.
 
 ### Pendo SDK integration - Android:
 
