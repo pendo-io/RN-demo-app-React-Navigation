@@ -9,8 +9,9 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import Task from './Task';
+import { PendoSDK } from 'rn-pendo-sdk';
 
-export default function Plan() {
+export default function Plan({ route, navigation }) {
 
   const [task, setTask] = useState()
   const [taskItems,setTaskItems] = useState([])
@@ -25,6 +26,11 @@ export default function Plan() {
     let newTaskItems = [...taskItems]
     newTaskItems.splice(index, 1)
     setTaskItems(newTaskItems)
+  }
+
+  const logout = () => {
+    PendoSDK.endSession()
+    navigation.navigate('Login')
   }
 
   return (
@@ -47,6 +53,11 @@ export default function Plan() {
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.addTasksWrapper}>
+          <TouchableOpacity onPress={() => logout()}>
+            <View style={styles.addButtonWrapper}>
+              <Text style={styles.logout}>Logout</Text>
+            </View>
+        </TouchableOpacity>
         <TextInput
             style={styles.input}
             onChangeText={text => setTask(text)}
@@ -114,4 +125,9 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     color: '#2f3641'
   },
+  logout: {
+    fontSize: 12,
+    fontWeight: '300',
+    color: '#2f3641'
+  }
 });
