@@ -8,13 +8,16 @@ Here's a sample To-Do app to show how the Pendo SDK can be integrated into any a
 In the sample app you will be able to:
 
 1. Login into the app (No real authentication mechanism is present as it is not necessary for the purpose of this project - any username and password will "log" you into the app).
-<img src="https://user-images.githubusercontent.com/93860419/158052631-7361eee6-e0f6-418f-aab2-a574bbc73847.gif" width="180" height="380"/>
+<img src="https://user-images.githubusercontent.com/93860419/160425292-df4b5b35-5ed6-4505-bc8d-29a2ffb535f4.gif" width="180" height="380"/>
 
-2. Add new tasks.
-<img src="https://user-images.githubusercontent.com/93860419/158052795-9486e947-e93f-441c-ae20-bc8d99a2ec42.gif" width="180" height="380"/>
+2. Logout.   
+<img src="https://user-images.githubusercontent.com/93860419/160425507-491e7e45-bf21-43d3-8c8f-c55fd6652ee9.gif" width="180" height="380"/>
 
-3. Remove tasks (Tapping on an existing task will remove it).
-<img src="https://user-images.githubusercontent.com/93860419/158052886-66dfef30-5c15-4c88-b947-21f49b0e352c.gif" width="180" height="380"/>
+3. Add new tasks.
+<img src="https://user-images.githubusercontent.com/93860419/160425658-7685d264-90a7-407f-a3d8-7909a8e3c7a3.gif" width="180" height="380"/>
+
+4. Remove tasks (Tapping on an existing task will remove it).
+<img src="https://user-images.githubusercontent.com/93860419/160426117-5202a426-b948-4086-98b4-cbe611c65511.gif" width="180" height="380"/>
 
 ## Pendo SDK integration 
 
