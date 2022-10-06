@@ -3,8 +3,7 @@ import Login from './components/Login';
 import Plan from './components/Plan';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {PendoSDK, NavigationLibraryType} from 'rn-pendo-sdk';
-import {withPendoRN} from 'rn-pendo-sdk';
+import {PendoSDK, NavigationLibraryType, withPendoRN} from 'rn-pendo-sdk';
 import {useRef} from 'react';
 
 function initPendo (){
@@ -26,12 +25,8 @@ function App(props) {
     ref={navigationRef}
     onStateChange={()=> {
       const state = navigationRef.current.getRootState()
-      props.onStateChange(state);
-    }} 
-    onReady ={()=>{
-      const state = navigationRef.current.getRootState()
-      props.onStateChange(state);
-    }}>
+      //props.onStateChange(state);
+    }} >
       <Stack.Navigator
         initialRouteName="Login"
         screenOptions={{
@@ -50,5 +45,6 @@ function App(props) {
 }
 
 export default withPendoRN(App)
+
 
 
