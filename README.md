@@ -132,7 +132,7 @@ function App(props) {
     }} 
     onReady ={()=>{
       const state = navigationRef.current.getRootState()
-      props.onStateChange(state);
+      props.onReady(state);
     }}>
       <Stack.Navigator
         initialRouteName="Login"
@@ -254,7 +254,7 @@ function App(props) {
     }} 
     onReady ={()=>{
       const state = navigationRef.current.getRootState()
-      props.onStateChange(state);
+      props.onReady(state);
     }}>
       <Stack.Navigator
         initialRouteName="Login"
