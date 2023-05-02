@@ -3,12 +3,10 @@ import Login from './components/Login';
 import Plan from './components/Plan';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {PendoSDK, NavigationLibraryType} from 'rn-pendo-sdk';
-import {withPendoRN} from 'rn-pendo-sdk';
-import {useRef} from 'react';
+import {PendoSDK, NavigationLibraryType, WithPendoReactNavigation} from 'rn-pendo-sdk';
 
 function initPendo (){
-  const navigationOptions = {library: NavigationLibraryType.ReactNavigation, navigation: null};
+  const navigationOptions = {library: NavigationLibraryType.ReactNavigation};
   const pendoKey = 'YOUR-APP-KEY';
   PendoSDK.setup(pendoKey, navigationOptions);
 
@@ -18,20 +16,9 @@ initPendo();
 const Stack = createNativeStackNavigator();
 
 function App(props) {
-
-  const navigationRef = useRef();
-
+  const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer);
   return (
-    <NavigationContainer 
-    ref={navigationRef}
-    onStateChange={()=> {
-      const state = navigationRef.current.getRootState()
-      props.onStateChange(state);
-    }} 
-    onReady ={()=>{
-      const state = navigationRef.current.getRootState()
-      props.onReady(state);
-    }}>
+    <PendoNavigationContainer>
       <Stack.Navigator
         initialRouteName="Login"
         screenOptions={{
@@ -45,10 +32,10 @@ function App(props) {
         name='Plan'
         component={Plan}/>
       </Stack.Navigator>
-    </NavigationContainer>
+    </PendoNavigationContainer>
   );
 }
 
-export default withPendoRN(App)
+export default App;
 
 
