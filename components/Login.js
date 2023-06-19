@@ -7,7 +7,7 @@ import {
     Button,
 } from 'react-native'
 import React, {useContext} from 'react'
-import {PendoSDK} from 'pendo';
+import {PendoSDK} from 'rn-pendo-sdk';
 
 export default function Login({route, navigation}) {
 

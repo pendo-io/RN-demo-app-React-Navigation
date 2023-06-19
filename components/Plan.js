@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, {useContext, useState} from 'react';
 import Task from './Task';
-import {PendoSDK, WithPendoModal} from 'pendo';
+import {PendoSDK, WithPendoModal} from 'rn-pendo-sdk';
 import {ThemeContext } from './ThemeContext';
 
 
