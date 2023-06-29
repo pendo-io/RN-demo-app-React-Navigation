@@ -27,8 +27,13 @@
           <action android:name="android.intent.action.VIEW"/>
           <category android:name="android.intent.category.DEFAULT"/>
           <category android:name="android.intent.category.BROWSABLE"/>
-          <data android:scheme="YOUR-APP-SCHEME"/>
+          <data android:scheme="pendo-e462ad1b"/>
         </intent-filter>
       </activity>
+
+<!--        <meta-data android:name="pnd_device_url" android:value="https://app.pendo-mobile-hummus.pendo-dev.com" />-->
+<!--        <meta-data android:name="pnd_app_url" android:value="https://app.pendo-mobile-hummus.pendo-dev.com" />-->
+<!--        <meta-data android:name="pnd_data_url" android:value="https://app.pendo-mobile-hummus.pendo-dev.com" />-->
+
     </application>
 </manifest>

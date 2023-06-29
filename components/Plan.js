@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, {useContext, useState} from 'react';
 import Task from './Task';
-import {PendoSDK, WithPendoModal} from 'rn-pendo-sdk';
+import {PendoSDK} from 'rn-pendo-sdk';
 import {ThemeContext } from './ThemeContext';
 
 
@@ -40,11 +40,11 @@ export default function Plan({route, navigation}) {
         navigation.navigate('Login')
     }
 
-    const PendoModal = WithPendoModal(Modal);
+    // const PendoModal = WithPendoModal(Modal);
 
     return (
         <View style={isDarkMode ? styles.containerDark : styles.containerLight}>
-            <PendoModal
+            <Modal
                 animationType="slide"
                 transparent={true}
                 visible={modalVisible}
@@ -62,7 +62,7 @@ export default function Plan({route, navigation}) {
                         </Pressable>
                     </View>
                 </View>
-            </PendoModal>
+            </Modal>
             <View style={styles.tasksWrapper}>
                 <Text style={styles.title}>Daily tasks</Text>
                 <Pressable

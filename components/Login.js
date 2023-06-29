@@ -32,7 +32,7 @@ export default function Login({route, navigation}) {
 
             PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
 
-            navigation.navigate('Plan')
+            navigation.navigate('TabNav')
         }
     }
 
