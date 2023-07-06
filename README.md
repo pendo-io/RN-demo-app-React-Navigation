@@ -23,7 +23,7 @@ In the sample app you will be able to:
 
 In this section you will be presented with the **actual steps** taken to integrate the Pendo SDK into the example To-Do app.
 
-### Pendo SDK integration - Android:
+### Android:
 
 1. In the application folder, run the following commands:
 ```
@@ -54,21 +54,7 @@ If applicable, add the following ```<uses-permission>``` to the manifest in the 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 ```
 
-4. In the application metro.config.js.  
-Add the following statements in the transformer:
-  
-(metro.config.js lines 16-23)
-```
-  minifierConfig: {
-      keep_classnames: true, // Preserve class names
-      keep_fnames: true, // Preserve function names
-      mangle: {
-        keep_classnames: true, // Preserve class names
-        keep_fnames: true, // Preserve function names
-      }
-    }
-```
-5. Add the following ```<activity>``` to the manifest in the ```<application>``` tag:  
+4. Add the following ```<activity>``` to the manifest in the ```<application>``` tag:  
 **IMPORTANT**: don't forget to replace ```"YOUR-APP-SCHEME"``` with your own app scheme. 
   
 (Android.manifest lines 25-32)
@@ -82,79 +68,8 @@ Add the following statements in the transformer:
         </intent-filter>
       </activity>
 ```
-6. In the application main file (App.js), add the following code:  
-**IMPORTANT**: don't forget to replace ```'YOUR-APP-KEY'``` with your own app key. 
-  
-(App.js lines 6-16)
-```
-import {PendoSDK, NavigationLibraryType} from 'rn-pendo-sdk';
-import {withPendoRN} from 'rn-pendo-sdk';
-import {useRef} from 'react';
 
-function initPendo (){
-  const navigationOptions = {library: NavigationLibraryType.ReactNavigation, navigation: null};
-  const pendoKey = 'YOUR-APP-KEY';
-  PendoSDK.setup(pendoKey, navigationOptions);
-
-}
-initPendo();
-```
-  
-7. Initialize Pendo where your visitor is being identified (e.g. login, register, etc.).  
-**IMPORTANT**: The following is an example of a possible user or "visitor" logging into your application.  
-Passing null or "" to the visitorId will generate an anonymous visitor id.
-
-(Login.js 28-33)
-```
-      const visitorId = 'VISITOR-UNIQUE-ID';
-      const accountId = 'ACCOUNT-UNIQUE-ID';
-      const visitorData = {Age: '25', Country: 'USA'}; // example data
-      const accountData = {Tier: '1', Size: 'Enterprise'}; // example data
-
-      PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
-```
-
-8. Add the following code in the method that creates the NavigationContainer (e.g. RootNavigator) and returns the NavigationContainer wrapped using withPendoRN:  
-**IMPORTANT**: This function must be called after PendoSDK.setup completes  
-
-(App.js 20-52)
-```
-function App(props) {
-
-  const navigationRef = useRef();
-
-  return (
-    <NavigationContainer 
-    ref={navigationRef}
-    onStateChange={()=> {
-      const state = navigationRef.current.getRootState()
-      props.onStateChange(state);
-    }} 
-    onReady ={()=>{
-      const state = navigationRef.current.getRootState()
-      props.onReady(state);
-    }}>
-      <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen
-          name="Login"
-          component={Login}
-        />
-        <Stack.Screen
-        name='Plan'
-        component={Plan}/>
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-
-export default withPendoRN(App)
-```
-
-### Pendo SDK integration - iOS:
+### iOS:
 
 1. In the application folder, run the following commands:  
 ```
@@ -190,9 +105,11 @@ pod install
 }
 ```
 
-4. In the application metro.config.js.  
-Add the following statements in the transformer:
-  
+### React Native / Javascript
+
+1. In the application metro.config.js.  
+   Add the following statements in the transformer:
+
 (metro.config.js lines 16-23)
 ```
   minifierConfig: {
@@ -205,27 +122,25 @@ Add the following statements in the transformer:
     }
 ```
 
-5. In the application main file (App.js), add the following code:  
-**IMPORTANT**: don't forget to replace ```'YOUR-APP-KEY'``` with your own app key. 
-  
+2. In the application main file (App.js), add the following code:  
+   **IMPORTANT**: don't forget to replace ```'YOUR-APP-KEY'``` with your own app key.
+
 (App.js lines 6-16)
 ```
 import {PendoSDK, NavigationLibraryType} from 'rn-pendo-sdk';
-import {withPendoRN} from 'rn-pendo-sdk';
-import {useRef} from 'react';
+import {WithPendoReactNavigation} from 'rn-pendo-sdk';
 
 function initPendo (){
-  const navigationOptions = {library: NavigationLibraryType.ReactNavigation, navigation: null};
+  const navigationOptions = {library: NavigationLibraryType.ReactNavigation};
   const pendoKey = 'YOUR-APP-KEY';
   PendoSDK.setup(pendoKey, navigationOptions);
-
 }
+
 initPendo();
 ```
-  
-6. Initialize Pendo where your visitor is being identified (e.g. login, register, etc.).  
-**IMPORTANT**: The following is an example of a possible user or "visitor" logging into your application.  
-Passing null or "" to the visitorId will generate an anonymous visitor id.
+2. Initialize Pendo where your visitor is being identified (e.g. login, register, etc.).  
+   **IMPORTANT**: The following is an example of a possible user or "visitor" logging into your application.  
+   Passing null or "" to the visitorId will generate an anonymous visitor id.
 
 (Login.js 28-33)
 ```
@@ -236,26 +151,16 @@ Passing null or "" to the visitorId will generate an anonymous visitor id.
 
       PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
 ```
-7.Add the following code in the method that creates the NavigationContainer (e.g. RootNavigator) and returns the NavigationContainer wrapped using withPendoRN:  
-**IMPORTANT**: This function must be called after PendoSDK.setup completes  
+
+3. Add the following code in the method that creates the `NavigationContainer` (e.g. RootNavigator) and returns the NavigationContainer wrapped using `WithPendoReactNavigation`:  
+   **IMPORTANT**: This function must be called after PendoSDK.setup completes
 
 (App.js 20-52)
 ```
-function App(props) {
-
-  const navigationRef = useRef();
-
+function App() {
+  const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer);
   return (
-    <NavigationContainer 
-    ref={navigationRef}
-    onStateChange={()=> {
-      const state = navigationRef.current.getRootState()
-      props.onStateChange(state);
-    }} 
-    onReady ={()=>{
-      const state = navigationRef.current.getRootState()
-      props.onReady(state);
-    }}>
+    <PendoNavigationContainer>
       <Stack.Navigator
         initialRouteName="Login"
         screenOptions={{
@@ -269,12 +174,36 @@ function App(props) {
         name='Plan'
         component={Plan}/>
       </Stack.Navigator>
-    </NavigationContainer>
+    </PendoNavigationContainer>
   );
 }
 
-export default withPendoRN(App)
+export default App
+```
+4. If you are using React Native Modal, you need to wrap it using `WithPendoModal`
+```javascript
+const PendoModal = WithPendoModal(Modal);
+<PendoModal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+           Alert.alert('Modal has been closed.');
+           setModalVisible(!modalVisible);
+        }}>
+   <View style={styles.centeredView}>
+      <View style={styles.modalView}>
+         <Text style={styles.modalText}>Hello World!</Text>
+         <Pressable
+                 style={[styles.button, styles.buttonClose]}
+                 onPress={() => setModalVisible(!modalVisible)}>
+            <Text style={styles.textStyle}>Hide Modal</Text>
+         </Pressable>
+      </View>
+   </View>
+</PendoModal>
 ```
 
+(Plan.js 43-107)
 ## Questions 
 You can notify us of any issues under the issues tab.
