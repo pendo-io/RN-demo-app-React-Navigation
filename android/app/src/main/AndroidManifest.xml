@@ -22,13 +22,25 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
-      <activity android:name="sdk.pendo.io.activities.PendoGateActivity" android:launchMode="singleInstance">
-        <intent-filter>
-          <action android:name="android.intent.action.VIEW"/>
-          <category android:name="android.intent.category.DEFAULT"/>
-          <category android:name="android.intent.category.BROWSABLE"/>
-          <data android:scheme="YOUR-APP-SCHEME"/>
-        </intent-filter>
-      </activity>
+
+        <activity android:name="sdk.pendo.io.activities.PendoGateActivity"
+        android:exported="true"
+
+        android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="pendo-024df34a"/>
+                <data android:scheme="pendo-fb974b23"/>
+
+            </intent-filter>
+        </activity>
+        <!-- pendo-test V2 2.5.1 and beyond -->
+        <!-- -->
+
+        <!-- <meta-data android:name="pnd_device_url" android:value="https://app.pendo-mobile-hummus.pendo-dev.com" />
+        <meta-data android:name="pnd_app_url" android:value="https://app.pendo-mobile-hummus.pendo-dev.com" />
+        <meta-data android:name="pnd_data_url" android:value="https://app.pendo-mobile-hummus.pendo-dev.com" /> -->
     </application>
 </manifest>

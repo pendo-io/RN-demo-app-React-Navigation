@@ -5,19 +5,73 @@ import {
     KeyboardAvoidingView,
     TextInput,
     TouchableOpacity,
-    Keyboard, Modal, Pressable, Alert,
+    Keyboard, Pressable, Alert, Button, Modal,TouchableWithoutFeedback
 } from 'react-native';
 import React, {useContext, useState} from 'react';
 import Task from './Task';
-import {PendoSDK, WithPendoModal} from 'rn-pendo-sdk';
+import {PendoSDK} from 'rn-pendo-sdk';
 import {ThemeContext } from './ThemeContext';
+import PendoModal from './PendoModal';
 
+
+export interface RenderModalViewProps {
+    children: any;
+    type?: string;
+    transparent?: boolean;
+    onBackPressed: () => void;
+  }
+
+  
+
+  function empty(){
+    return "";
+  }
 
 export default function Plan({route, navigation}) {
     // initial state
     const { isDarkMode, setTheme } = useContext(ThemeContext);
 
     const [modalVisible, setModalVisible] = useState(false);
+    function _onBackPressed() {
+        // if (onBackPressed) {
+            setModalVisible(!modalVisible);
+        //   onBackPressed();
+        // }
+      }
+
+    const childrenView  = <View style={[
+        styles.container,
+        {
+          // Try setting `flexDirection` to `"row"`.
+          flexDirection: 'column',
+        },
+      ]}>
+        <Pressable 
+            // onPress={() => _onBackPressed()}
+            style={[styles.button, styles.buttonClose]}>
+                <View>
+                    <View>
+                    <TouchableOpacity/>
+                    </View>
+                </View>
+              <Text style={styles.textStyle}>do nothing</Text>
+        </Pressable>
+
+        <Button title="close modal" onPress={() => _onBackPressed()}/>
+    </View>
+
+  
+
+    const { children, type = 'slide', transparent = true, onBackPressed, paddingTop = 30 } : RenderModalViewProps = {children: childrenView ,onBackPressed: empty};
+
+    
+
+
+    // const [isModalVisiblee, setModalVisiblee] = useState(false);
+
+    // const toggleModal = () => {
+    //     setModalVisiblee(!isModalVisiblee);
+    // };
 
 
     const [task, setTask] = useState()
@@ -40,29 +94,24 @@ export default function Plan({route, navigation}) {
         navigation.navigate('Login')
     }
 
-    const PendoModal = WithPendoModal(Modal);
-
     return (
+
+
         <View style={isDarkMode ? styles.containerDark : styles.containerLight}>
-            <PendoModal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                    Alert.alert('Modal has been closed.');
-                    setModalVisible(!modalVisible);
-                }}>
-                <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Hello World!</Text>
-                        <Pressable
-                            style={[styles.button, styles.buttonClose]}
-                            onPress={() => setModalVisible(!modalVisible)}>
-                            <Text style={styles.textStyle}>Hide Modal</Text>
-                        </Pressable>
-                    </View>
-                </View>
-            </PendoModal>
+
+ <PendoModal
+      animationType={ type }
+      transparent={ transparent }
+      visible={modalVisible}
+      onRequestClose={ _onBackPressed }
+    > 
+      <View style={styles.containerDark}>
+
+        {children}
+      </View>
+    </PendoModal>
+
+        
             <View style={styles.tasksWrapper}>
                 <Text style={styles.title}>Daily tasks</Text>
                 <Pressable
